@@ -4,7 +4,7 @@ import tensorflow as tf
 def train_model(model, train_dataset, val_dataset, loss_fn, optimizer, metrics, epochs):
     """
     Train the model using the given datasets and parameters.
-    
+
     Args:
         model (tf.keras.Model): The model to train.
         train_dataset (tf.data.Dataset): Training dataset.
@@ -56,10 +56,19 @@ def train_model(model, train_dataset, val_dataset, loss_fn, optimizer, metrics, 
             val_step(val_inputs, val_labels)
 
         # Print epoch results
-        template = 'Epoch {}, Train Loss: {}, Val Loss: {}'
-        metric_template = ', Train {}: {:.4f}, Val {}: {:.4f}'
-        metrics_string = ''
-        for metric, train_metric, val_metric in zip(metrics, train_metrics, val_metrics):
-            metrics_string += metric_template.format(metric.__name__, train_metric.result(),
-                                                     metric.__name__, val_metric.result())
-        print(template.format(epoch + 1, train_loss.result(), val_loss.result()) + metrics_string)
+        template = "Epoch {}, Train Loss: {}, Val Loss: {}"
+        metric_template = ", Train {}: {:.4f}, Val {}: {:.4f}"
+        metrics_string = ""
+        for metric, train_metric, val_metric in zip(
+            metrics, train_metrics, val_metrics
+        ):
+            metrics_string += metric_template.format(
+                metric.__name__,
+                train_metric.result(),
+                metric.__name__,
+                val_metric.result(),
+            )
+        print(
+            template.format(epoch + 1, train_loss.result(), val_loss.result())
+            + metrics_string
+        )

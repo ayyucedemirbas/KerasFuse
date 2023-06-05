@@ -1,14 +1,13 @@
-
-import numpy as np
 import tensorflow as tf
+import tensorflow_addons as tfa
 from tensorflow import keras
 from tensorflow.keras import layers
-import tensorflow_addons as tfa
 
 """
 Author: Khalid Salama
 https://keras.io/examples/vision/mlp_image_classification/
 """
+
 
 class Patches(layers.Layer):
     def __init__(self, patch_size, num_patches):
@@ -28,11 +27,17 @@ class Patches(layers.Layer):
         patch_dims = patches.shape[-1]
         patches = tf.reshape(patches, [batch_size, self.num_patches, patch_dims])
         return patches
-    
-
 
     class MLPMixerLayer(layers.Layer):
-        def __init__(self, num_patches, hidden_units, dropout_rate, embedding_dim, *args, **kwargs):
+        def __init__(
+            self,
+            num_patches,
+            hidden_units,
+            dropout_rate,
+            embedding_dim,
+            *args,
+            **kwargs
+        ):
             super().__init__(*args, **kwargs)
 
             self.mlp1 = keras.Sequential(
@@ -56,11 +61,13 @@ class Patches(layers.Layer):
         def call(self, inputs):
             # Apply layer normalization.
             x = self.normalize(inputs)
-            # Transpose inputs from [num_batches, num_patches, hidden_units] to [num_batches, hidden_units, num_patches].
+            # Transpose inputs from [num_batches, num_patches,
+            # hidden_units] to [num_batches, hidden_units, num_patches].
             x_channels = tf.linalg.matrix_transpose(x)
             # Apply mlp1 on each channel independently.
             mlp1_outputs = self.mlp1(x_channels)
-            # Transpose mlp1_outputs from [num_batches, hidden_dim, num_patches] to [num_batches, num_patches, hidden_units].
+            # Transpose mlp1_outputs from [num_batches,
+            # hidden_dim, num_patches] to [num_batches, num_patches, hidden_units].
             mlp1_outputs = tf.linalg.matrix_transpose(mlp1_outputs)
             # Add skip connection.
             x = mlp1_outputs + inputs

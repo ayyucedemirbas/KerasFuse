@@ -4,7 +4,7 @@ import tensorflow as tf
 def evaluate_model(model, test_dataset, loss_fn, metrics):
     """
     Evaluate the model using the given test dataset and metrics.
-    
+
     Args:
         model (tf.keras.Model): The model to evaluate.
         test_dataset (tf.data.Dataset): Test dataset.
@@ -27,9 +27,9 @@ def evaluate_model(model, test_dataset, loss_fn, metrics):
         test_step(inputs, labels)
 
     # Print results
-    template = 'Test Loss: {}'
-    metric_template = ', Test {}: {:.4f}'
-    metrics_string = ''
+    template = "Test Loss: {}"
+    metric_template = ", Test {}: {:.4f}"
+    metrics_string = ""
     for metric, test_metric in zip(metrics, test_metrics):
         metrics_string += metric_template.format(metric.__name__, test_metric.result())
     print(template.format(test_loss.result()) + metrics_string)
