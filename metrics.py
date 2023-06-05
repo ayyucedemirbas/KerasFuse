@@ -4,12 +4,12 @@ import tensorflow as tf
 def dice_coefficient(y_true, y_pred, smooth=1e-7):
     """
     Dice coefficient for semantic segmentation.
-    
+
     Args:
         y_true (tf.Tensor): True labels.
         y_pred (tf.Tensor): Predicted labels.
         smooth (float): Smoothing factor to avoid division by zero (default: 1e-7).
-        
+
     Returns:
         tf.Tensor: Dice coefficient.
     """
@@ -22,11 +22,11 @@ def dice_coefficient(y_true, y_pred, smooth=1e-7):
 def binary_accuracy(y_true, y_pred):
     """
     Binary accuracy for binary classification.
-    
+
     Args:
         y_true (tf.Tensor): True labels.
         y_pred (tf.Tensor): Predicted labels.
-        
+
     Returns:
         tf.Tensor: Binary accuracy.
     """
@@ -39,11 +39,11 @@ def binary_accuracy(y_true, y_pred):
 def categorical_accuracy(y_true, y_pred):
     """
     Categorical accuracy for multi-class classification.
-    
+
     Args:
         y_true (tf.Tensor): True labels.
         y_pred (tf.Tensor): Predicted labels.
-        
+
     Returns:
         tf.Tensor: Categorical accuracy.
     """
@@ -57,15 +57,17 @@ def categorical_accuracy(y_true, y_pred):
 def accuracy(y_true, y_pred):
     """
     Accuracy metric for classification.
-    
+
     Args:
         y_true (tf.Tensor): True labels.
         y_pred (tf.Tensor): Predicted labels.
-        
+
     Returns:
         tf.Tensor: Accuracy.
     """
-    correct_predictions = tf.equal(tf.argmax(y_true, axis=-1), tf.argmax(y_pred, axis=-1))
+    correct_predictions = tf.equal(
+        tf.argmax(y_true, axis=-1), tf.argmax(y_pred, axis=-1)
+    )
     accuracy = tf.reduce_mean(tf.cast(correct_predictions, tf.float32))
     return accuracy
 
@@ -73,11 +75,11 @@ def accuracy(y_true, y_pred):
 def precision(y_true, y_pred):
     """
     Precision metric for binary or multi-class classification.
-    
+
     Args:
         y_true (tf.Tensor): True labels.
         y_pred (tf.Tensor): Predicted labels.
-        
+
     Returns:
         tf.Tensor: Precision.
     """
@@ -90,11 +92,11 @@ def precision(y_true, y_pred):
 def recall(y_true, y_pred):
     """
     Recall metric for binary or multi-class classification.
-    
+
     Args:
         y_true (tf.Tensor): True labels.
         y_pred (tf.Tensor): Predicted labels.
-        
+
     Returns:
         tf.Tensor: Recall.
     """
@@ -107,11 +109,11 @@ def recall(y_true, y_pred):
 def f1_score(y_true, y_pred):
     """
     F1 score metric for binary or multi-class classification.
-    
+
     Args:
         y_true (tf.Tensor): True labels.
         y_pred (tf.Tensor): Predicted labels.
-        
+
     Returns:
         tf.Tensor: F1 score.
     """
