@@ -5,7 +5,7 @@ description = "KerasFuse is a Python library that combines the power of TensorFl
 authors = ["Ayyuce Demirbas <a.ayyuced@gmail.com>"]
 maintainers = ["Ayyuce Demirbas <a.ayyuced@gmail.com>"]
 readme = "README.md"
-#packages = [{include = "KerasFuse"}]
+packages = [{include = "kerasfuse"}]
 homepage = "https://github.com/ayyucedemirbas/KerasFuse"
 repository = "https://github.com/ayyucedemirbas/KerasFuse"
 documentation = "https://github.com/ayyucedemirbas/KerasFuse/blob/main/README.md"
