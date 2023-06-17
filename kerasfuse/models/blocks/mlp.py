@@ -1,7 +1,7 @@
 import tensorflow as tf
-import tensorflow_addons as tfa
+from keras.layers.normalization.layer_normalization import LayerNormalization
 from tensorflow import keras
-from tensorflow.keras import layers
+from tensorflow.python.keras.layers import Activation, Dense, Dropout, Layer
 
 """
 Author: Khalid Salama
@@ -9,7 +9,7 @@ https://keras.io/examples/vision/mlp_image_classification/
 """
 
 
-class Patches(layers.Layer):
+class Patches(Layer):
     def __init__(self, patch_size, num_patches):
         super().__init__()
         self.patch_size = patch_size
@@ -28,7 +28,7 @@ class Patches(layers.Layer):
         patches = tf.reshape(patches, [batch_size, self.num_patches, patch_dims])
         return patches
 
-    class MLPMixerLayer(layers.Layer):
+    class MLPMixerLayer(Layer):
         def __init__(
             self,
             num_patches,
@@ -42,21 +42,21 @@ class Patches(layers.Layer):
 
             self.mlp1 = keras.Sequential(
                 [
-                    layers.Dense(units=num_patches),
-                    tfa.layers.GELU(),
-                    layers.Dense(units=num_patches),
-                    layers.Dropout(rate=dropout_rate),
+                    Dense(units=num_patches),
+                    Activation(keras.activations.gelu),
+                    Dense(units=num_patches),
+                    Dropout(rate=dropout_rate),
                 ]
             )
             self.mlp2 = keras.Sequential(
                 [
-                    layers.Dense(units=num_patches),
-                    tfa.layers.GELU(),
-                    layers.Dense(units=embedding_dim),
-                    layers.Dropout(rate=dropout_rate),
+                    Dense(units=num_patches),
+                    Activation(keras.activations.gelu),
+                    Dense(units=embedding_dim),
+                    Dropout(rate=dropout_rate),
                 ]
             )
-            self.normalize = layers.LayerNormalization(epsilon=1e-6)
+            self.normalize = LayerNormalization(epsilon=1e-6)
 
         def call(self, inputs):
             # Apply layer normalization.
