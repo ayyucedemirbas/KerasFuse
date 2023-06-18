@@ -48,8 +48,6 @@ flake8 = "^6.0.0"
 isort = "^5.12.0"
 
 
-[tool.pytest.ini_options]
-addopts = "--isort"
 
 [tool.isort]
 line_length = 88
