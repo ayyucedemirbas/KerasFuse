@@ -4,14 +4,22 @@ repos:
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0
     hooks:
-    -   id: check-added-large-files
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-yaml
+      - id: check-docstring-first
+      - id: check-executables-have-shebangs
+      - id: check-toml
+      - id: check-case-conflict
+      - id: check-added-large-files
+        args: ['--maxkb=2048']
         exclude: ^logo/
-    -   id: check-toml
-    -   id: check-yaml
-        args:
-        -   --unsafe
-    -   id: end-of-file-fixer
-    -   id: trailing-whitespace
+      - id: detect-private-key
+      - id: forbid-new-submodules
+      - id: pretty-format-json
+        args: ['--autofix', '--no-sort-keys', '--indent=4']
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
 -   repo: https://github.com/asottile/pyupgrade
     rev: v3.4.0
     hooks:

@@ -1,15 +1,15 @@
-import tensorflow as tf
-from tensorflow import keras
-from tensorflow.keras import layers
-
-from kerasfuse.models.blocks.mlp import MLPMixerLayer, Patches
-
 """
 Test the MLP Mixer Layer
 Based on:
 Author: Khalid Salama
 https://keras.io/examples/vision/mlp_image_classification/
 """
+
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers
+
+from kerasfuse.models.blocks.mlp import MLPMixerLayer, Patches
 
 # Test Data Preparation
 num_classes = 100
