@@ -17,6 +17,9 @@
   <img alt="isort" src="https://img.shields.io/badge/isort-checked-yellow"/>
 </p>
 
+<h4 align="center">🚧 Warning this project is under heavy development and not ready for production. ABI changes can happen frequently until reach stable version 🚧 </h4>
+
+
 KerasFuse is a Python library that combines the power of TensorFlow and Keras with various computer vision techniques for medical image analysis tasks. It provides a collection of modules and functions to facilitate the development of deep learning models in TensorFlow Keras for tasks such as image segmentation, classification, and more.
 
 
