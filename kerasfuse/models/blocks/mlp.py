@@ -1,11 +1,11 @@
-import tensorflow as tf
-from tensorflow import keras
-from tensorflow.python.keras import layers
-
 """
 Author: Khalid Salama
 https://keras.io/examples/vision/mlp_image_classification/
 """
+
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.python.keras import layers
 
 
 class Patches(layers.Layer):

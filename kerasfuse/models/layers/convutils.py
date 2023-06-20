@@ -1,5 +1,5 @@
-import tensorflow as tf
 import numpy as np
+import tensorflow as tf
 
 
 def same_padding(kernel_size, dilation=1):
@@ -8,7 +8,8 @@ def same_padding(kernel_size, dilation=1):
 
     if np.any((kernel_size_np - 1) * dilation % 2 == 1):
         raise NotImplementedError(
-            f"Same padding not available for kernel_size={kernel_size_np} and dilation={dilation_np}."
+            "Same padding not available for"
+            + f"kernel_size={kernel_size_np} and dilation={dilation_np}."
         )
 
     padding_np = (kernel_size_np - 1) / 2 * dilation_np
@@ -33,7 +34,9 @@ def calculate_out_shape(in_shape, kernel_size, stride, padding):
     stride_np = np.atleast_1d(stride)
     padding_np = np.atleast_1d(padding)
 
-    out_shape_np = ((in_shape_np - kernel_size_np + padding_np + padding_np) // stride_np) + 1
+    out_shape_np = (
+        (in_shape_np - kernel_size_np + padding_np + padding_np) // stride_np
+    ) + 1
     out_shape = tuple(int(s) for s in out_shape_np)
 
     return out_shape
@@ -41,7 +44,6 @@ def calculate_out_shape(in_shape, kernel_size, stride, padding):
 
 def gaussian_1d(sigma, truncated=4.0, approx="erf", normalize=False):
     sigma = tf.convert_to_tensor(sigma, dtype=tf.float32)
-    device = sigma.device
     if truncated <= 0.0:
         raise ValueError(f"truncated must be positive, got {truncated}.")
     tail = int(max(float(sigma) * truncated, 0.5) + 0.5)
@@ -52,7 +54,7 @@ def gaussian_1d(sigma, truncated=4.0, approx="erf", normalize=False):
         out = tf.clip_by_value(out, clip_value_min=0)
     elif approx.lower() == "sampled":
         x = tf.range(-tail, tail + 1, dtype=tf.float32)
-        out = tf.exp(-0.5 / (sigma * sigma) * x ** 2)
+        out = tf.exp(-0.5 / (sigma * sigma) * x**2)
         if not normalize:
             out = out / (2.5066282 * sigma)
     elif approx.lower() == "scalespace":
@@ -86,7 +88,10 @@ def _modified_bessel_0(x):
     x = tf.convert_to_tensor(x, dtype=tf.float32)
     if tf.abs(x) < 3.75:
         y = x * x / 14.0625
-        return polyval([0.45813e-2, 0.360768e-1, 0.2659732, 1.2067492, 3.0899424, 3.5156229, 1.0], y)
+        return polyval(
+            [0.45813e-2, 0.360768e-1, 0.2659732, 1.2067492, 3.0899424, 3.5156229, 1.0],
+            y,
+        )
     ax = tf.abs(x)
     y = 3.75 / ax
     _coef = [
@@ -107,7 +112,15 @@ def _modified_bessel_1(x):
     x = tf.convert_to_tensor(x, dtype=tf.float32)
     if tf.abs(x) < 3.75:
         y = x * x / 14.0625
-        _coef = [0.32411e-3, 0.301532e-2, 0.2658733e-1, 0.15084934, 0.51498869, 0.87890594, 0.5]
+        _coef = [
+            0.32411e-3,
+            0.301532e-2,
+            0.2658733e-1,
+            0.15084934,
+            0.51498869,
+            0.87890594,
+            0.5,
+        ]
         return tf.abs(x) * polyval(_coef, y)
     ax = tf.abs(x)
     y = 3.75 / ax
@@ -134,7 +147,11 @@ def _modified_bessel_i(n, x):
         return x
     device = x.device
     tox = 2.0 / tf.abs(x)
-    ans, bip, bi = tf.constant(0.0, device=device), tf.constant(0.0, device=device), tf.constant(1.0, device=device)
+    ans, bip, bi = (
+        tf.constant(0.0, device=device),
+        tf.constant(0.0, device=device),
+        tf.constant(1.0, device=device),
+    )
     m = int(2 * (n + np.floor(np.sqrt(40.0 * n))))
     for j in range(m, 0, -1):
         bim = bip + float(j) * tox * bi
@@ -149,13 +166,15 @@ def _modified_bessel_i(n, x):
     ans = ans * _modified_bessel_0(x) / bi
     return -ans if x < 0.0 and (n % 2) == 1 else ans
 
+
 def same_padding(kernel_size, dilation=1):
     kernel_size_np = np.atleast_1d(kernel_size)
     dilation_np = np.atleast_1d(dilation)
 
     if np.any((kernel_size_np - 1) * dilation % 2 == 1):
         raise NotImplementedError(
-            f"Same padding not available for kernel_size={kernel_size_np} and dilation={dilation_np}."
+            "Same padding not available for "
+            + f"kernel_size={kernel_size_np} and dilation={dilation_np}."
         )
 
     padding_np = (kernel_size_np - 1) / 2 * dilation_np
@@ -180,14 +199,20 @@ def calculate_out_shape(in_shape, kernel_size, stride, padding):
     stride_np = np.atleast_1d(stride)
     padding_np = np.atleast_1d(padding)
 
-    out_shape_np = ((in_shape_np - kernel_size_np + padding_np + padding_np) // stride_np) + 1
+    out_shape_np = (
+        (in_shape_np - kernel_size_np + padding_np + padding_np) // stride_np
+    ) + 1
     out_shape = tuple(int(s) for s in out_shape_np)
 
     return out_shape
 
 
 def gaussian_1d(sigma, truncated=4.0, approx="erf", normalize=False):
-    sigma = tf.convert_to_tensor(sigma, dtype=tf.float32, device=sigma.device if isinstance(sigma, tf.Tensor) else None)
+    sigma = tf.convert_to_tensor(
+        sigma,
+        dtype=tf.float32,
+        device=sigma.device if isinstance(sigma, tf.Tensor) else None,
+    )
     device = sigma.device
     if truncated <= 0.0:
         raise ValueError(f"truncated must be positive, got {truncated}.")
@@ -217,7 +242,9 @@ def gaussian_1d(sigma, truncated=4.0, approx="erf", normalize=False):
     return out / tf.reduce_sum(out) if normalize else out
 
 
-def separable_conv1d(x, depthwise_filter, pointwise_filter, stride=1, padding="same", dilation=1):
+def separable_conv1d(
+    x, depthwise_filter, pointwise_filter, stride=1, padding="same", dilation=1
+):
     x = tf.convert_to_tensor(x, dtype=tf.float32)
     depthwise_filter = tf.convert_to_tensor(depthwise_filter, dtype=tf.float32)
     pointwise_filter = tf.convert_to_tensor(pointwise_filter, dtype=tf.float32)
@@ -228,23 +255,33 @@ def separable_conv1d(x, depthwise_filter, pointwise_filter, stride=1, padding="s
     if x.ndim != 3:
         raise ValueError(f"Input 'x' must have 3 dimensions, got {x.ndim} dimensions.")
     if depthwise_filter.ndim != 2:
-        raise ValueError(f"Depthwise filter must have 2 dimensions, got {depthwise_filter.ndim} dimensions.")
+        raise ValueError(
+            f"Depthwise filter must have 2 dimensions, "
+            f"got {depthwise_filter.ndim} dimensions."
+        )
     if pointwise_filter.ndim != 2:
-        raise ValueError(f"Pointwise filter must have 2 dimensions, got {pointwise_filter.ndim} dimensions.")
+        raise ValueError(
+            f"Pointwise filter must have 2 dimensions, "
+            f"got {pointwise_filter.ndim} dimensions."
+        )
     if depthwise_filter.shape[1] != x.shape[1]:
         raise ValueError(
-            f"Depthwise filter shape[1] ({depthwise_filter.shape[1]}) must match input shape[1] ({x.shape[1]})."
+            f"Depthwise filter shape[1] ({depthwise_filter.shape[1]}) "
+            f"must match input shape[1] ({x.shape[1]})."
         )
     if pointwise_filter.shape[1] != depthwise_filter.shape[0]:
         raise ValueError(
-            f"Pointwise filter shape[1] ({pointwise_filter.shape[1]}) must match depthwise filter shape[0] ({depthwise_filter.shape[0]})."
+            f"Pointwise filter shape[1] ({pointwise_filter.shape[1]}) "
+            f"must match depthwise filter shape[0] ({depthwise_filter.shape[0]})."
         )
 
     padding_np = np.atleast_1d(padding)
     input_shape_np = np.array(x.shape)
 
     if padding == "same":
-        padding_np = same_padding(depthwise_filter.shape[0], dilation_np)  # depthwise filter size is the kernel size
+        padding_np = same_padding(
+            depthwise_filter.shape[0], dilation_np
+        )  # depthwise filter size is the kernel size
         out_shape_np = input_shape_np
         out_shape_np[-1] = calculate_out_shape(
             in_shape=input_shape_np[-1],
@@ -277,11 +314,15 @@ def separable_conv1d(x, depthwise_filter, pointwise_filter, stride=1, padding="s
         rates=[1, dilation_np, 1, 1],
         padding="VALID",
     )
-    x_reshaped = tf.reshape(x_reshaped, [x.shape[0], out_shape_np[1], depthwise_filter.shape[0], x.shape[2]])
+    x_reshaped = tf.reshape(
+        x_reshaped, [x.shape[0], out_shape_np[1], depthwise_filter.shape[0], x.shape[2]]
+    )
 
     out = tf.einsum("bijc,bcjk->bijk", x_reshaped, depthwise_filter_expanded)
     out = tf.einsum("bijk,bck->bijc", out, pointwise_filter_expanded)
-    out_shape_final = tf.concat([out_shape_np[:2], tf.constant([out_shape_np[-1]])], axis=0)
+    out_shape_final = tf.concat(
+        [out_shape_np[:2], tf.constant([out_shape_np[-1]])], axis=0
+    )
     out = tf.reshape(out, out_shape_final)
 
     return out
