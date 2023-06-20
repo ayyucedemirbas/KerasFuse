@@ -1,3 +1,11 @@
+<p align="center">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/ayyucedemirbas/KerasFuse/assets/8023150/41d8880d-8117-448b-a725-2b72d2d08beb">
+  <source media="(prefers-color-scheme: light)" srcset="https://github.com/ayyucedemirbas/KerasFuse/assets/8023150/41d8880d-8117-448b-a725-2b72d2d08beb">
+  <img alt="KerasFuse" src="https://github.com/ayyucedemirbas/KerasFuse">
+</picture>
+</p>
+
 <h1 align="center">KerasFuse</h1>
 
 <p>
@@ -11,7 +19,6 @@
 
 KerasFuse is a Python library that combines the power of TensorFlow and Keras with various computer vision techniques for medical image analysis tasks. It provides a collection of modules and functions to facilitate the development of deep learning models in TensorFlow Keras for tasks such as image segmentation, classification, and more.
 
-![image](https://github.com/ayyucedemirbas/KerasFuse/assets/8023150/41d8880d-8117-448b-a725-2b72d2d08beb)
 
 
 ## Getting Started
