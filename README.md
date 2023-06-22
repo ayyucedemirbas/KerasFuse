@@ -1,9 +1,5 @@
 <p align="center">
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/ayyucedemirbas/KerasFuse/assets/8023150/41d8880d-8117-448b-a725-2b72d2d08beb">
-  <source media="(prefers-color-scheme: light)" srcset="https://github.com/ayyucedemirbas/KerasFuse/assets/8023150/41d8880d-8117-448b-a725-2b72d2d08beb">
-  <img alt="KerasFuse" src="https://github.com/ayyucedemirbas/KerasFuse">
-</picture>
+  <a href="https://github.com/ayyucedemirbas/KerasFuse"><img src="https://github.com/ayyucedemirbas/KerasFuse/assets/8023150/41d8880d-8117-448b-a725-2b72d2d08beb" alt="KerasFuse"></a>
 </p>
 
 <h1 align="center">KerasFuse</h1>
@@ -52,14 +48,6 @@ More details at
 python3 -m venv .venv
 source .venv/bin/activate
 pip3 install -r requirements.txt
-```
-
-For MacOS
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip3 install -r requirements-macos.txt
 ```
 
 ## License
