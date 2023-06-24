@@ -4,13 +4,27 @@
 
 <h1 align="center">KerasFuse</h1>
 
-<p>
+
+<p align="center">
   <img alt="GitHub" src="https://img.shields.io/github/license/ayyucedemirbas/Kerasfuse">
-  <img alt="Python3" src="https://img.shields.io/badge/Python-3.8.1 | 3.9 | 3.10 | 3.11-3776AB.svg?logo=Python&logoColor=white"/>
   <img alt="Tensorflow" src="https://img.shields.io/badge/Tensorflow-v2.12.0-%23FF6F00.svg?logo=Tensorflow&logoColor=white"/>
   <img alt="Keras" src="https://img.shields.io/badge/Keras-v2.12.0-%23D00000.svg?logo=Keras&logoColor=white"/>
   <img alt="Black" src="https://img.shields.io/badge/code%20style-black-black"/>
   <img alt="isort" src="https://img.shields.io/badge/isort-checked-yellow"/>
+</p>
+<p align="center">
+<a href="https://pypi.org/project/kerasfuse" target="_blank">
+    <img src="https://img.shields.io/pypi/v/kerasfuse?color=%2334D058&label=pypi%20package" alt="Package version">
+</a>
+<a href="https://pypi.org/project/kerasfuse" target="_blank">
+    <img src="https://img.shields.io/pypi/dm/kerasfuse?color=red" alt="Download Count">
+</a>
+<a href="https://pypi.org/project/kerasfuse" target="_blank">
+    <img src="https://img.shields.io/pypi/pyversions/kerasfuse.svg?color=%2334D058" alt="Supported Python versions">
+</a>
+<a href="https://pypi.org/project/kerasfuse" target="_blank">
+    <img src="https://img.shields.io/pypi/status/kerasfuse?color=orange" alt="Project Status">
+</a>
 </p>
 
 <h4 align="center">🚧 Warning this project is under heavy development and not ready for production. ABI changes can happen frequently until reach stable version 🚧 </h4>
