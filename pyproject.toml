@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "KerasFuse"
-version = "0.1a0"
+version = "0.10a1"
 description = "KerasFuse is a Python library that combines the power of TensorFlow and Keras with various computer vision techniques for medical image analysis tasks."
 authors = ["Ayyuce Demirbas <a.ayyuced@gmail.com>"]
 maintainers = ["Ayyuce Demirbas <a.ayyuced@gmail.com>"]
