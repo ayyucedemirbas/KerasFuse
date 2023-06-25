@@ -20,4 +20,3 @@ RUN pip3 install --user kerasfuse
 
 # Set the default command to start a shell
 CMD ["/bin/bash"]
-

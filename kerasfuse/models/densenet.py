@@ -1,7 +1,7 @@
 import tensorflow as tf
 
 
-def densenet(input_shape, num_classes):
+def dense_net(input_shape, num_classes):
     """
     DenseNet model for image classification.
 

@@ -17,3 +17,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 __version__ = "0.01a1"
+
+from .evaluate import evaluate_model as evaluate_model
+from .train import train_model as train_model

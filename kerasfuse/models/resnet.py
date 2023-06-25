@@ -1,7 +1,7 @@
 import tensorflow as tf
 
 
-def resnet(input_shape, num_classes):
+def res_net(input_shape, num_classes):
     """
     ResNet model for image classification.
 

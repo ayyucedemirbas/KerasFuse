@@ -41,7 +41,7 @@ KerasFuse is a Python library that combines the power of TensorFlow and Keras wi
 KerasFuse is a project that relies heavily on the Tensorflow and Keras libraries. It is designed to work seamlessly with these powerful tools for deep learning and neural network development. In order to use KerasFuse effectively, please ensure that you have the following:
 
 * Python 3.8+
-* Tensorflow 2.12.0+ 
+* Tensorflow 2.12.0+
 * Keras 2.12.0+
 * OpenCV 4.7+
 * Scikit-Learn 1.2.2+
@@ -53,7 +53,7 @@ $ pip install kerasfuse
 ---> 100%
 ```
 
-## Development 
+## Development
 
 #### Poetry Installation
 

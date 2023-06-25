@@ -14,7 +14,7 @@ from tensorflow.keras.layers import (
 from tensorflow.keras.models import Model
 
 
-def VNet(input_shape):
+def vnet(input_shape):
     inputs = Input(input_shape)
 
     # Encoding path

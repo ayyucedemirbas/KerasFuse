@@ -10,7 +10,7 @@ import tensorflow as tf
 from tensorflow.keras import layers
 
 
-def MobileNet(input_shape, num_classes):
+def mobile_net(input_shape, num_classes):
     model = tf.keras.Sequential()
 
     # First convolution block
