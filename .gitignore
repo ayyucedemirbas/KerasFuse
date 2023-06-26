@@ -304,3 +304,8 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# gitmoji files to ignore
+.gitmojirc.js
+.gitmojirc.json
+.gitmojirc.yml
