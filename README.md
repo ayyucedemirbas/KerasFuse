@@ -55,31 +55,7 @@ $ pip install kerasfuse
 
 ## Development
 
-#### Poetry Installation
-
-```bash
-poetry install
-poetry shell
-```
-
-#### Tip
-
-If you have multiple Python versions on your system, you can set your Python version by using `poetry env` . Here's an example of how to use it:
-
-```bash
-poetry env use python3.10
-```
-
-More details at
-[poetry-switching-between-environments](https://python-poetry.org/docs/managing-environments/#switching-between-environments)
-
-#### Pip Installations
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip3 install -r requirements.txt
-```
+Please read the [Contributing](CONTRIBUTING.md) guidelines
 
 ## License
 
