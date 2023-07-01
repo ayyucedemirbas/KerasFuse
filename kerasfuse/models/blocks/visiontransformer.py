@@ -1,8 +1,9 @@
 import tensorflow as tf
 from tensorflow.keras import Model, layers
-from transformerblock import TransformerBlock as TransformerBlock
 
 from kerasfuse.activations import gelu
+
+from .transformerblock import TransformerBlock
 
 
 class VisionTransformer(Model):

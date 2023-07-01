@@ -9,7 +9,7 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
 
-from kerasfuse.models.blocks.mlp import MLPMixerLayer, Patches
+from kerasfuse.models.blocks import MLPMixerLayer, Patches
 
 # Test Data Preparation
 num_classes = 100

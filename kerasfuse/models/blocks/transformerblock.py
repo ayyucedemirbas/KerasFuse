@@ -1,6 +1,7 @@
 import tensorflow as tf
-from multiheadselfattention import MultiHeadSelfAttention as MultiHeadSelfAttention
 from tensorflow.keras import layers
+
+from .multiheadselfattention import MultiHeadSelfAttention
 
 
 class TransformerBlock(layers.Layer):

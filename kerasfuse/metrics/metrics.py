@@ -147,7 +147,8 @@ def f1_score(y_true, y_pred):
 
 def specificity(y_true, y_pred):
     """
-    Specificity (also called the true negative rate) measures the proportion of actual negatives that are correctly identified.
+    Specificity (also called the true negative rate)
+      measures the proportion of actual negatives that are correctly identified.
 
     Args:
     y_true : tf.Tensor
@@ -169,7 +170,8 @@ def specificity(y_true, y_pred):
 
 def balanced_accuracy(y_true, y_pred):
     """
-    Balanced Accuracy is the average of recall obtained on each class to deal with imbalanced datasets.
+    Balanced Accuracy is the average of recall
+        obtained on each class to deal with imbalanced datasets.
 
     Args:
     y_true : tf.Tensor

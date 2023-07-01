@@ -52,7 +52,8 @@ def grad_cam(model, image, interpolant=0.5, plot_results=True):
 
     # compute gradient of top predicted class
     with tf.GradientTape() as tape:
-        # create a model with original model inputs and the last conv_layer as the output
+        # create a model with original model inputs
+        # and the last conv_layer as the output
         gradient_model = Model([model.inputs], [target_layer.output, model.output])
         # pass the image through the base model and get the feature map
         conv2d_out, prediction = gradient_model(img)
