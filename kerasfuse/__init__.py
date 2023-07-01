@@ -20,3 +20,5 @@ __version__ = "0.01a1"
 
 from .evaluate import evaluate_model as evaluate_model
 from .train import train_model as train_model
+
+__all__ = ["evaluate_model", "train_model"]
