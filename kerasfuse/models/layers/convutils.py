@@ -28,20 +28,6 @@ def stride_minus_kernel_padding(kernel_size, stride):
     return out_padding if len(out_padding) > 1 else out_padding[0]
 
 
-def calculate_out_shape(in_shape, kernel_size, stride, padding):
-    in_shape_np = np.atleast_1d(in_shape)
-    kernel_size_np = np.atleast_1d(kernel_size)
-    stride_np = np.atleast_1d(stride)
-    padding_np = np.atleast_1d(padding)
-
-    out_shape_np = (
-        (in_shape_np - kernel_size_np + padding_np + padding_np) // stride_np
-    ) + 1
-    out_shape = tuple(int(s) for s in out_shape_np)
-
-    return out_shape
-
-
 def gaussian_1d(sigma, truncated=4.0, approx="erf", normalize=False):
     sigma = tf.convert_to_tensor(sigma, dtype=tf.float32)
     if truncated <= 0.0:
@@ -167,32 +153,6 @@ def _modified_bessel_i(n, x):
     return -ans if x < 0.0 and (n % 2) == 1 else ans
 
 
-def same_padding(kernel_size, dilation=1):
-    kernel_size_np = np.atleast_1d(kernel_size)
-    dilation_np = np.atleast_1d(dilation)
-
-    if np.any((kernel_size_np - 1) * dilation % 2 == 1):
-        raise NotImplementedError(
-            "Same padding not available for "
-            + f"kernel_size={kernel_size_np} and dilation={dilation_np}."
-        )
-
-    padding_np = (kernel_size_np - 1) / 2 * dilation_np
-    padding = tuple(int(p) for p in padding_np)
-
-    return padding if len(padding) > 1 else padding[0]
-
-
-def stride_minus_kernel_padding(kernel_size, stride):
-    kernel_size_np = np.atleast_1d(kernel_size)
-    stride_np = np.atleast_1d(stride)
-
-    out_padding_np = stride_np - kernel_size_np
-    out_padding = tuple(int(p) for p in out_padding_np)
-
-    return out_padding if len(out_padding) > 1 else out_padding[0]
-
-
 def calculate_out_shape(in_shape, kernel_size, stride, padding):
     in_shape_np = np.atleast_1d(in_shape)
     kernel_size_np = np.atleast_1d(kernel_size)
@@ -205,41 +165,6 @@ def calculate_out_shape(in_shape, kernel_size, stride, padding):
     out_shape = tuple(int(s) for s in out_shape_np)
 
     return out_shape
-
-
-def gaussian_1d(sigma, truncated=4.0, approx="erf", normalize=False):
-    sigma = tf.convert_to_tensor(
-        sigma,
-        dtype=tf.float32,
-        device=sigma.device if isinstance(sigma, tf.Tensor) else None,
-    )
-    device = sigma.device
-    if truncated <= 0.0:
-        raise ValueError(f"truncated must be positive, got {truncated}.")
-    tail = int(max(float(sigma) * truncated, 0.5) + 0.5)
-    if approx.lower() == "erf":
-        x = tf.range(-tail, tail + 1, dtype=tf.float32, device=device)
-        t = 0.70710678 / tf.abs(sigma)
-        out = 0.5 * ((t * (x + 0.5)).erf() - (t * (x - 0.5)).erf())
-        out = tf.clip_by_value(out, clip_value_min=0)
-    elif approx.lower() == "sampled":
-        x = tf.range(-tail, tail + 1, dtype=tf.float32, device=sigma.device)
-        out = tf.exp(-0.5 / (sigma * sigma) * x**2)
-        if not normalize:  # compute the normalizer
-            out = out / (2.5066282 * sigma)
-    elif approx.lower() == "scalespace":
-        sigma2 = sigma * sigma
-        out_pos = [None] * (tail + 1)
-        out_pos[0] = _modified_bessel_0(sigma2)
-        out_pos[1] = _modified_bessel_1(sigma2)
-        for k in range(2, len(out_pos)):
-            out_pos[k] = _modified_bessel_i(k, sigma2)
-        out = out_pos[:0:-1]
-        out.extend(out_pos)
-        out = tf.stack(out) * tf.exp(-sigma2)
-    else:
-        raise NotImplementedError(f"Unsupported option: approx='{approx}'.")
-    return out / tf.reduce_sum(out) if normalize else out
 
 
 def separable_conv1d(

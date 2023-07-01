@@ -3,6 +3,9 @@ from collections.abc import Sequence
 import tensorflow as tf
 from tensorflow.keras import layers
 
+from .convolutions import Convolution
+from .residualunit import ResidualUnit
+
 
 class AutoEncoder(tf.keras.Model):
     def __init__(
