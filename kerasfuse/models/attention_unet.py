@@ -16,7 +16,7 @@ def attention_block(input1, input2):
     x = tf.keras.layers.Conv2D(filters=input2.shape[-1], kernel_size=1)(input2)
     psi = tf.keras.layers.Add()([g, x])
     psi = tf.keras.layers.Activation("relu")(psi)
-    psi = tf.keras.layer.Conv2D(filters=1, kernel_size=1)(psi)
+    psi = tf.keras.layers.Conv2D(filters=1, kernel_size=1)(psi)
     psi = tf.keras.layers.Activation("sigmoid")(psi)
     output = tf.keras.layers.Activation("sigmoid")(psi)
     return output
